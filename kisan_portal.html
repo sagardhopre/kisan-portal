@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>किसान सेवा पोर्टल | Kisan Seva Portal</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron: #FF6B00;
+  --white: #FFFFFF;
+  --green: #128807;
+  --navy: #002366;
+  --gold: #D4A017;
+  --bg: #F0F4F0;
+  --card: #FFFFFF;
+  --text: #1a1a2e;
+  --sub: #555;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== GOVT TOP STRIP ===== */
+.govt-strip {
+  background: linear-gradient(90deg, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%);
+  height: 8px;
+}
+.govt-header {
+  background: var(--white);
+  border-bottom: 3px solid var(--navy);
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+.ashoka-wheel {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--navy) 0deg 13.8deg, transparent 13.8deg 24deg, var(--navy) 24deg 37.8deg, transparent 37.8deg 48deg, var(--navy) 48deg 61.8deg, transparent 61.8deg 72deg, var(--navy) 72deg 85.8deg, transparent 85.8deg 96deg, var(--navy) 96deg 109.8deg, transparent 109.8deg 120deg, var(--navy) 120deg 133.8deg, transparent 133.8deg 144deg, var(--navy) 144deg 157.8deg, transparent 157.8deg 168deg, var(--navy) 168deg 181.8deg, transparent 181.8deg 192deg, var(--navy) 192deg 205.8deg, transparent 205.8deg 216deg, var(--navy) 216deg 229.8deg, transparent 229.8deg 240deg, var(--navy) 240deg 253.8deg, transparent 253.8deg 264deg, var(--navy) 264deg 277.8deg, transparent 277.8deg 288deg, var(--navy) 288deg 301.8deg, transparent 301.8deg 312deg, var(--navy) 312deg 325.8deg, transparent 325.8deg 336deg, var(--navy) 336deg 349.8deg, transparent 349.8deg 360deg);
+  border: 3px solid var(--navy);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.ashoka-wheel::after {
+  content: '';
+  width: 12px; height: 12px;
+  background: var(--navy);
+  border-radius: 50%;
+  position: absolute;
+}
+.header-text h1 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.header-text p {
+  font-size: 0.8rem;
+  color: var(--green);
+  font-weight: 600;
+}
+.header-text .subtitle {
+  font-size: 0.75rem;
+  color: var(--sub);
+}
+.header-right {
+  margin-left: auto;
+  text-align: right;
+}
+.header-right .creator-badge {
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+.header-right .time-display {
+  font-size: 0.8rem;
+  color: var(--sub);
+}
+
+/* ===== NAVBAR ===== */
+.nav-bar {
+  background: var(--navy);
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+.nav-bar a {
+  color: rgba(255,255,255,0.9);
+  padding: 0.9rem 1.2rem;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+.nav-bar a:hover, .nav-bar a.active {
+  background: rgba(255,165,0,0.3);
+  color: #FFD700;
+  border-bottom: 3px solid var(--saffron);
+}
+
+/* ===== TICKER ===== */
+.news-ticker {
+  background: var(--saffron);
+  color: white;
+  padding: 0.4rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  gap: 3rem;
+}
+.ticker-text {
+  animation: ticker 30s linear infinite;
+  display: inline-block;
+}
+@keyframes ticker {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
+}
+
+/* ===== SECTIONS ===== */
+.section { display: none; padding: 1.5rem; }
+.section.active { display: block; }
+
+/* ===== HERO BANNER ===== */
+.hero-banner {
+  background: linear-gradient(135deg, #002366 0%, #004aad 50%, #128807 100%);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner::before {
+  content: '🌾';
+  position: absolute;
+  font-size: 8rem;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.15;
+}
+.hero-banner h2 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+.hero-banner p { font-size: 1rem; opacity: 0.9; margin-bottom: 1.5rem; }
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+.hero-stat .num { font-size: 1.8rem; font-weight: 900; color: #FFD700; }
+.hero-stat .label { font-size: 0.75rem; opacity: 0.85; }
+
+/* ===== STATS GRID ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 1.2rem;
+  border-left: 5px solid var(--saffron);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.stat-card:nth-child(2) { border-left-color: var(--green); }
+.stat-card:nth-child(3) { border-left-color: var(--navy); }
+.stat-card:nth-child(4) { border-left-color: var(--gold); }
+.stat-icon { font-size: 2.2rem; }
+.stat-info .num { font-size: 1.5rem; font-weight: 900; color: var(--navy); }
+.stat-info .lbl { font-size: 0.8rem; color: var(--sub); }
+
+/* ===== PHOTO GALLERY ===== */
+.gallery-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--saffron);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.photo-card {
+  background: var(--card);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.photo-card:hover { transform: translateY(-5px); }
+.photo-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+.photo-caption {
+  padding: 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  border-top: 2px solid var(--saffron);
+}
+
+/* ===== SCHEMES ===== */
+.scheme-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border: 2px solid var(--navy);
+  background: transparent;
+  color: var(--navy);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--navy);
+  color: white;
+}
+.schemes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.2rem;
+}
+.scheme-card {
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s;
+}
+.scheme-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.scheme-header {
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.scheme-icon {
+  width: 50px; height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.scheme-name { font-weight: 800; font-size: 0.95rem; color: var(--navy); line-height: 1.3; }
+.scheme-ministry { font-size: 0.75rem; color: var(--sub); }
+.scheme-body { padding: 0 1.2rem 1rem; }
+.scheme-desc { font-size: 0.85rem; color: var(--sub); margin-bottom: 0.8rem; line-height: 1.5; }
+.scheme-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+.tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.benefit-amount { font-size: 1.1rem; font-weight: 900; color: var(--green); margin-bottom: 0.8rem; }
+.scheme-actions { display: flex; gap: 0.5rem; padding: 0.8rem 1.2rem; background: #f8f8f8; border-top: 1px solid #eee; }
+.btn-apply {
+  flex: 1;
+  padding: 0.6rem;
+  background: linear-gradient(135deg, var(--green), #0a6604);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+.btn-apply:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(18,136,7,0.4); }
+.btn-info {
+  padding: 0.6rem 0.8rem;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-docs {
+  padding: 0.6rem 0.8rem;
+  background: var(--saffron);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* ===== LAND RECORDS ===== */
+.land-section { max-width: 800px; margin: 0 auto; }
+.land-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.land-card-header {
+  background: linear-gradient(135deg, var(--navy), #1a3a6e);
+  color: white;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.land-card-body { padding: 1.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+label { font-size: 0.85rem; font-weight: 700; color: var(--navy); display: block; margin-bottom: 0.3rem; }
+select, input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.2s;
+}
+select:focus, input:focus { border-color: var(--navy); outline: none; }
+.btn-fetch {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-fetch:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,0,0.4); }
+.record-result {
+  background: #f0f8ff;
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-top: 1rem;
+  display: none;
+}
+.record-result.show { display: block; }
+.record-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #ddd; }
+.record-row:last-child { border-bottom: none; }
+.record-label { font-weight: 700; color: var(--navy); font-size: 0.85rem; }
+.record-value { font-size: 0.85rem; color: var(--text); }
+.govt-link-btn {
+  display: block;
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-decoration: none;
+  color: white;
+  margin-top: 0.8rem;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+.govt-link-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+/* ===== AI ASSISTANT ===== */
+.ai-chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+.ai-header {
+  background: linear-gradient(135deg, var(--navy), var(--green));
+  padding: 1.2rem 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ai-avatar {
+  width: 50px; height: 50px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.ai-header h3 { font-size: 1.1rem; font-weight: 800; }
+.ai-header p { font-size: 0.8rem; opacity: 0.85; }
+.ai-status { margin-left: auto; display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; }
+.status-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.chat-messages {
+  height: 380px;
+  overflow-y: auto;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fafafa;
+}
+.msg { display: flex; gap: 0.7rem; max-width: 85%; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.msg-bubble {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.msg.bot .msg-bubble { background: white; border: 1px solid #e0e0e0; color: var(--text); border-radius: 4px 12px 12px 12px; }
+.msg.user .msg-bubble { background: var(--navy); color: white; border-radius: 12px 4px 12px 12px; }
+.msg-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.bot-avatar { background: linear-gradient(135deg, var(--navy), var(--green)); color: white; }
+.user-avatar { background: var(--saffron); color: white; }
+.quick-btns { padding: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap; background: #f0f0f0; }
+.quick-btn {
+  padding: 0.4rem 0.8rem;
+  background: white;
+  border: 2px solid var(--navy);
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quick-btn:hover { background: var(--navy); color: white; }
+.chat-input-area {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 0.5rem;
+}
+.chat-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: none;
+  line-height: 1.4;
+}
+.chat-input:focus { border-color: var(--navy); outline: none; }
+.send-btn {
+  width: 45px; height: 45px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.send-btn:hover { background: var(--green); transform: scale(1.1); }
+.typing { display: flex; gap: 4px; padding: 0.5rem; align-items: center; }
+.typing span { width: 8px; height: 8px; background: var(--sub); border-radius: 50%; animation: bounce 0.8s infinite; }
+.typing span:nth-child(2) { animation-delay: 0.15s; }
+.typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: white;
+  border-radius: 14px;
+  max-width: 600px;
+  width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.modal-head {
+  background: linear-gradient(135deg, var(--navy), var(--green));
+  color: white;
+  padding: 1.2rem 1.5rem;
+  border-radius: 14px 14px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+.modal-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.modal-body { padding: 1.5rem; }
+.doc-list { list-style: none; }
+.doc-list li {
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  background: #f0f8ff;
+  border-left: 4px solid var(--navy);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===== PHOTO PAHANI ===== */
+.pahani-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+.link-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 2px solid transparent;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.link-card:hover { border-color: var(--saffron); transform: translateY(-3px); }
+.link-card .link-icon { font-size: 2.5rem; margin-bottom: 0.7rem; display: block; }
+.link-card h4 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+.link-card p { font-size: 0.8rem; color: var(--sub); margin-bottom: 0.8rem; }
+.link-card a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--navy);
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.link-card a:hover { background: var(--green); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.8);
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+.footer strong { color: var(--gold); }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 3px; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  background: var(--green);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transform: translateX(200%);
+  transition: transform 0.3s;
+}
+.toast.show { transform: translateX(0); }
+
+@media(max-width:768px) {
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .hero-banner h2 { font-size: 1.4rem; }
+  .header-text h1 { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="govt-strip"></div>
+
+<!-- HEADER -->
+<div class="govt-header">
+  <div class="ashoka-wheel"></div>
+  <div class="header-text">
+    <h1>🌾 किसान सेवा पोर्टल</h1>
+    <p>भारत सरकार | Government of India — कृषि एवं किसान कल्याण मंत्रालय</p>
+    <p class="subtitle">Kisan Seva Portal | किसानों की समृद्धि, देश की उन्नति</p>
+  </div>
+  <div class="header-right">
+✅ Developed by: Sagar Dhopare
+    <span class="time-display" id="liveTime"></span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="nav-bar">
+  <a class="active" onclick="showTab('home')"><i class="fas fa-home"></i> होम</a>
+  <a onclick="showTab('dashboard')"><i class="fas fa-tachometer-alt"></i> किसान डैशबोर्ड</a>
+  <a onclick="showTab('schemes')"><i class="fas fa-list-alt"></i> सरकारी योजनाएं</a>
+  <a onclick="showTab('land')"><i class="fas fa-file-alt"></i> 7/12 & 8A रिकॉर्ड</a>
+  <a onclick="showTab('pahani')"><i class="fas fa-map"></i> फोटो पहाणी</a>
+  <a onclick="showTab('ai')"><i class="fas fa-robot"></i> AI सहायक</a>
+</nav>
+
+<!-- TICKER -->
+<div class="news-ticker">
+  <span class="ticker-text">🔔 PM किसान सम्मान निधि की अगली किस्त जल्द आएगी — अभी रजिस्ट्रेशन करें | 🌾 फसल बीमा योजना — अंतिम तिथि 31 मार्च | 🏦 किसान क्रेडिट कार्ड — ब्याज मुक्त ऋण उपलब्ध | 💧 PM सिंचाई योजना — आवेदन खुले हैं | 🇮🇳 अटल पेंशन योजना — अभी जुड़ें</span>
+</div>
+
+<!-- HOME SECTION -->
+<div id="home" class="section active">
+  <div class="hero-banner">
+    <h2>🙏 जय किसान, जय भारत!</h2>
+    <p>किसान सेवा पोर्टल पर आपका स्वागत है। यहाँ आपको सभी सरकारी योजनाओं की जानकारी, 7/12 व 8A खाता उतारा, और AI सहायक मिलेगा।</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">12+</div><div class="label">सरकारी योजनाएं</div></div>
+      <div class="hero-stat"><div class="num">2.5 करोड़</div><div class="label">लाभार्थी किसान</div></div>
+      <div class="hero-stat"><div class="num">24/7</div><div class="label">AI सहायक उपलब्ध</div></div>
+      <div class="hero-stat"><div class="num">100%</div><div class="label">मुफ्त सेवा</div></div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-info"><div class="num">₹6,000</div><div class="lbl">PM किसान वार्षिक लाभ</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🌱</div>
+      <div class="stat-info"><div class="num">50%</div><div class="lbl">फसल बीमा सब्सिडी</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🏦</div>
+      <div class="stat-info"><div class="num">₹3 लाख</div><div class="lbl">KCC ऋण सीमा</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👴</div>
+      <div class="stat-info"><div class="num">₹3,000</div><div class="lbl">पेंशन प्रति माह</div></div>
+    </div>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-images" style="color:var(--saffron)"></i> किसान एवं खेत की तस्वीरें</div>
+  <div class="photo-grid">
+    <div class="photo-card">
+      <div class="photo-img">👨‍🌾</div>
+      <div class="photo-caption">🌾 गेहूं की फसल — किसान रामलाल</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-img">🌾</div>
+      <div class="photo-caption">🌿 धान की खेती — पुणे</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-img">🚜</div>
+      <div class="photo-caption">🚜 आधुनिक ट्रैक्टर खेती</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-img">🌽</div>
+      <div class="photo-caption">🌽 मक्का उत्पादन — नासिक</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-img">🍅</div>
+      <div class="photo-caption">🍅 टमाटर बागवानी — सतारा</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-img">🌿</div>
+      <div class="photo-caption">🌿 जैविक खेती — कोल्हापुर</div>
+    </div>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-link" style="color:var(--green)"></i> त्वरित लिंक — Quick Links</div>
+  <div class="link-grid">
+    <div class="link-card">
+      <span class="link-icon">📋</span>
+      <h4>7/12 उतारा</h4>
+      <p>अपना जमीन का 7/12 उतारा निकालें</p>
+      <a href="https://digitalsatbara.mahabhumi.gov.in/" target="_blank">अभी निकालें ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">🗺️</span>
+      <h4>फोटो पहाणी</h4>
+      <p>भूलेख महाभूमि से फोटो पहाणी</p>
+      <a href="https://bhulekh.mahabhumi.gov.in/" target="_blank">देखें ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">💰</span>
+      <h4>PM किसान</h4>
+      <p>PM किसान सम्मान निधि — किस्त स्थिति</p>
+      <a href="https://pmkisan.gov.in" target="_blank">Check Status ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">🌱</span>
+      <h4>फसल बीमा</h4>
+      <p>PM फसल बीमा योजना — आवेदन</p>
+      <a href="https://pmfby.gov.in" target="_blank">Apply Now ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD SECTION -->
+<div id="dashboard" class="section">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #128807, #0a6604);">
+    <h2>🌾 किसान डैशबोर्ड</h2>
+    <p>आपकी खेती, योजनाएं और जमीन की जानकारी एक जगह</p>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-user" style="color:var(--saffron)"></i> किसान प्रोफाइल</div>
+  <div style="background:var(--card); border-radius:12px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
+    <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--saffron),var(--gold));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-shrink:0;">👨‍🌾</div>
+    <div>
+      <h3 style="color:var(--navy);font-size:1.3rem;font-weight:900;">Sagar Dhopare</h3>
+      <p style="color:var(--sub);font-size:0.9rem;">किसान आईडी: KIS-MH-2024-00001</p>
+      <p style="color:var(--green);font-size:0.9rem;font-weight:700;">✅ PM किसान पंजीकृत</p>
+      <p style="color:var(--sub);font-size:0.85rem;">📍 महाराष्ट्र | जिला: पुणे</p>
+    </div>
+    <div style="margin-left:auto; display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <span style="background:#e8f5e9;color:var(--green);padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700;">✅ KCC Active</span>
+      <span style="background:#fff3e0;color:var(--saffron);padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:700;">🌱 Fasal Bima</span>
+    </div>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-tractor" style="color:var(--green)"></i> मेरे खेत की जानकारी</div>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="showTab('land')">
+      <div class="photo-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);font-size:3rem;">📋</div>
+      <div class="photo-caption">7/12 उतारा देखें</div>
+    </div>
+    <div class="photo-card" onclick="showTab('land')">
+      <div class="photo-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);font-size:3rem;">📄</div>
+      <div class="photo-caption">8A खाता उतारा</div>
+    </div>
+    <div class="photo-card" onclick="showTab('pahani')">
+      <div class="photo-img" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);font-size:3rem;">🗺️</div>
+      <div class="photo-caption">फोटो पहाणी</div>
+    </div>
+    <div class="photo-card" onclick="showTab('schemes')">
+      <div class="photo-img" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0);font-size:3rem;">📰</div>
+      <div class="photo-caption">मेरी योजनाएं</div>
+    </div>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-chart-bar" style="color:var(--navy)"></i> योजना स्थिति — Applied Schemes</div>
+  <div style="background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:var(--navy);color:white;">
+          <th style="padding:0.8rem 1rem;text-align:left;font-size:0.85rem;">योजना का नाम</th>
+          <th style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">आवेदन तिथि</th>
+          <th style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">स्थिति</th>
+          <th style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">लाभ</th>
+        </tr>
+      </thead>
+      <tbody id="mySchemesTbl">
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:0.8rem 1rem;font-size:0.85rem;">PM किसान सम्मान निधि</td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">जनवरी 2024</td>
+          <td style="padding:0.8rem 1rem;text-align:center;"><span style="background:#d4edda;color:#155724;padding:0.2rem 0.6rem;border-radius:12px;font-size:0.78rem;font-weight:700;">✅ Active</span></td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;font-weight:700;color:var(--green);">₹6,000/वर्ष</td>
+        </tr>
+        <tr style="border-bottom:1px solid #eee;background:#fafafa;">
+          <td style="padding:0.8rem 1rem;font-size:0.85rem;">PM फसल बीमा योजना</td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">मार्च 2024</td>
+          <td style="padding:0.8rem 1rem;text-align:center;"><span style="background:#fff3cd;color:#856404;padding:0.2rem 0.6rem;border-radius:12px;font-size:0.78rem;font-weight:700;">⏳ Pending</span></td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;font-weight:700;color:var(--saffron);">50% Premium</td>
+        </tr>
+        <tr>
+          <td style="padding:0.8rem 1rem;font-size:0.85rem;">किसान क्रेडिट कार्ड</td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;">फरवरी 2024</td>
+          <td style="padding:0.8rem 1rem;text-align:center;"><span style="background:#d4edda;color:#155724;padding:0.2rem 0.6rem;border-radius:12px;font-size:0.78rem;font-weight:700;">✅ Approved</span></td>
+          <td style="padding:0.8rem 1rem;text-align:center;font-size:0.85rem;font-weight:700;color:var(--green);">₹3 लाख ऋण</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SCHEMES SECTION -->
+<div id="schemes" class="section">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #FF6B00, #D4A017);">
+    <h2>📋 सरकारी योजनाएं — Government Schemes</h2>
+    <p>किसानों के लिए सभी सरकारी योजनाएं — आवेदन करें और लाभ उठाएं!</p>
+  </div>
+
+  <div class="scheme-filters">
+    <button class="filter-btn active" onclick="filterSchemes('all', this)">सभी योजनाएं</button>
+    <button class="filter-btn" onclick="filterSchemes('income', this)">आय सहायता</button>
+    <button class="filter-btn" onclick="filterSchemes('insurance', this)">बीमा</button>
+    <button class="filter-btn" onclick="filterSchemes('credit', this)">ऋण / Credit</button>
+    <button class="filter-btn" onclick="filterSchemes('pension', this)">पेंशन</button>
+    <button class="filter-btn" onclick="filterSchemes('irrigation', this)">सिंचाई</button>
+  </div>
+
+  <div class="schemes-grid" id="schemesGrid">
+    <!-- Scheme cards injected by JS -->
+  </div>
+</div>
+
+<!-- LAND RECORDS SECTION -->
+<div id="land" class="section">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #002366, #1a4aad);">
+    <h2>📋 7/12 & 8A भूमि अभिलेख</h2>
+    <p>अपना 7/12 उतारा और 8A खाता उतारा यहाँ से निकालें। Maharashtra Bhulekh</p>
+  </div>
+
+  <div class="land-section">
+    <!-- 7/12 -->
+    <div class="land-card">
+      <div class="land-card-header"><i class="fas fa-file-alt"></i> 7/12 सातबारा उतारा (Digital Satbara)</div>
+      <div class="land-card-body">
+        <div class="form-row">
+          <div>
+            <label>विभाग / Division</label>
+            <select id="div712">
+              <option>अमरावती</option><option>औरंगाबाद</option><option>कोंकण</option>
+              <option selected>नाशिक</option><option>पुणे</option><option>नागपुर</option>
+            </select>
+          </div>
+          <div>
+            <label>जिला / District</label>
+            <select id="dist712">
+              <option>अहमदनगर</option><option>पुणे</option><option>नाशिक</option>
+              <option>सोलापुर</option><option>सातारा</option><option>कोल्हापुर</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>तालुका / Taluka</label>
+            <select id="tal712">
+              <option>हवेली</option><option>पुरंदर</option><option>भोर</option>
+              <option>मावल</option><option>मुळशी</option><option>खेड</option>
+            </select>
+          </div>
+          <div>
+            <label>गाव / Village</label>
+            <input type="text" id="vil712" placeholder="गाव का नाम लिखें">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>सर्वे नंबर / Survey Number</label>
+            <input type="text" id="survey712" placeholder="जैसे: 123/1/A">
+          </div>
+          <div>
+            <label>उतारा प्रकार</label>
+            <select id="type712">
+              <option>7/12</option><option>8A</option><option>6 डी</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-fetch" onclick="fetch712()">
+          <i class="fas fa-search"></i> 7/12 उतारा निकालें
+        </button>
+
+        <div class="record-result" id="result712">
+          <h4 style="color:var(--navy);margin-bottom:1rem;font-size:1.1rem;">📋 7/12 सातबारा उतारा</h4>
+          <div class="record-row"><span class="record-label">जिल्हा</span><span class="record-value" id="r-dist">—</span></div>
+          <div class="record-row"><span class="record-label">तालुका</span><span class="record-value" id="r-tal">—</span></div>
+          <div class="record-row"><span class="record-label">गाव</span><span class="record-value" id="r-vil">—</span></div>
+          <div class="record-row"><span class="record-label">सर्वे नंबर</span><span class="record-value" id="r-survey">—</span></div>
+          <div class="record-row"><span class="record-label">क्षेत्रफल</span><span class="record-value">2 हेक्टर 45 आर</span></div>
+          <div class="record-row"><span class="record-label">भूधारक</span><span class="record-value">Sagar Dhopare — खातेदार</span></div>
+          <div class="record-row"><span class="record-label">पिकाचे नाव</span><span class="record-value">गहू, ज्वारी (खरीप/रब्बी)</span></div>
+          <div class="record-row"><span class="record-label">सिंचन स्रोत</span><span class="record-value">विहीर (Well)</span></div>
+          <div class="record-row"><span class="record-label">जमीन प्रकार</span><span class="record-value">जिरायत (Jirayat)</span></div>
+          <div style="display:flex;gap:0.5rem;margin-top:1rem;">
+            <button onclick="printRecord()" style="flex:1;padding:0.7rem;background:var(--navy);color:white;border:none;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;">🖨️ प्रिंट करें</button>
+            <button onclick="downloadRecord()" style="flex:1;padding:0.7rem;background:var(--green);color:white;border:none;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;">⬇️ Download</button>
+          </div>
+          <a href="https://digitalsatbara.mahabhumi.gov.in/" target="_blank" class="govt-link-btn" style="background:linear-gradient(135deg,var(--saffron),var(--gold));">
+            🔗 महाराष्ट्र शासन — Live 7/12 Portal पर जाएं ↗
+          </a>
+        </div>
+
+        <div style="margin-top:1rem;padding:0.8rem;background:#e8f5e9;border-radius:8px;font-size:0.85rem;color:var(--green);font-weight:600;">
+          <i class="fas fa-info-circle"></i> Live 7/12 के लिए महाराष्ट्र सरकार की आधिकारिक वेबसाइट:
+        </div>
+        <a href="https://digitalsatbara.mahabhumi.gov.in/" target="_blank" class="govt-link-btn" style="background:linear-gradient(135deg,var(--navy),#1a4aad);">
+          🏛️ digitalsatbara.mahabhumi.gov.in — Official Site ↗
+        </a>
+        <a href="https://mahabhulekh.maharashtra.gov.in/" target="_blank" class="govt-link-btn" style="background:linear-gradient(135deg,var(--green),#0a6604);">
+          🏛️ mahabhulekh.maharashtra.gov.in — 8A / Records ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- 8A -->
+    <div class="land-card">
+      <div class="land-card-header"><i class="fas fa-book"></i> 8A खाता उतारा</div>
+      <div class="land-card-body">
+        <div class="form-row">
+          <div>
+            <label>जिला</label>
+            <select id="dist8a">
+              <option>पुणे</option><option>नाशिक</option><option>अहमदनगर</option><option>सोलापुर</option>
+            </select>
+          </div>
+          <div>
+            <label>तालुका</label>
+            <select id="tal8a">
+              <option>हवेली</option><option>पुरंदर</option><option>भोर</option><option>मावल</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>गाव</label>
+            <input type="text" id="vil8a" placeholder="गाव का नाम">
+          </div>
+          <div>
+            <label>खाता नंबर / Account No.</label>
+            <input type="text" id="khata8a" placeholder="जैसे: 456">
+          </div>
+        </div>
+        <button class="btn-fetch" onclick="fetch8A()" style="background:linear-gradient(135deg,var(--green),#0a6604);">
+          <i class="fas fa-search"></i> 8A खाता उतारा निकालें
+        </button>
+
+        <div class="record-result" id="result8a">
+          <h4 style="color:var(--navy);margin-bottom:1rem;">📄 8A खाता उतारा</h4>
+          <div class="record-row"><span class="record-label">खाता नंबर</span><span class="record-value" id="ra-khata">—</span></div>
+          <div class="record-row"><span class="record-label">खातेदार नाम</span><span class="record-value">Sagar Dhopare</span></div>
+          <div class="record-row"><span class="record-label">जिल्हा</span><span class="record-value" id="ra-dist">—</span></div>
+          <div class="record-row"><span class="record-label">एकूण क्षेत्र</span><span class="record-value">3 हेक्टर 20 आर</span></div>
+          <div class="record-row"><span class="record-label">सर्वे नंबर</span><span class="record-value">123/1, 124/2</span></div>
+          <div class="record-row"><span class="record-label">करणीय रक्कम</span><span class="record-value">₹ 450 (वार्षिक)</span></div>
+          <a href="https://mahabhulekh.maharashtra.gov.in/" target="_blank" class="govt-link-btn" style="background:linear-gradient(135deg,var(--green),#0a6604);">
+            🔗 Live 8A — mahabhulekh.maharashtra.gov.in ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO PAHANI SECTION -->
+<div id="pahani" class="section">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #128807, #002366);">
+    <h2>🗺️ फोटो पहाणी — Photo Pahani</h2>
+    <p>अपनी जमीन का नक्शा और फोटो पहाणी देखें। महाराष्ट्र भूलेख</p>
+  </div>
+
+  <div class="pahani-card">
+    <div class="land-card-header"><i class="fas fa-map-marked-alt"></i> फोटो पहाणी — खेत का नक्शा</div>
+    <div class="land-card-body">
+      <div class="form-row">
+        <div>
+          <label>जिला / District</label>
+          <select id="pahaniDist">
+            <option>पुणे</option><option>नाशिक</option><option>अहमदनगर</option>
+            <option>कोल्हापुर</option><option>सातारा</option><option>सोलापुर</option>
+          </select>
+        </div>
+        <div>
+          <label>तालुका / Taluka</label>
+          <select id="pahaniTal">
+            <option>हवेली</option><option>पुरंदर</option><option>भोर</option><option>मावल</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>गाव / Village</label>
+          <input type="text" id="pahaniVil" placeholder="गाव का नाम">
+        </div>
+        <div>
+          <label>सर्वे / Gat नंबर</label>
+          <input type="text" id="pahaniSurvey" placeholder="जैसे: 123 या 456/1">
+        </div>
+      </div>
+      <div style="display:flex;gap:0.8rem;">
+        <button class="btn-fetch" onclick="openPahani()" style="flex:1;">
+          <i class="fas fa-map"></i> फोटो पहाणी देखें
+        </button>
+        <button class="btn-fetch" onclick="openNaksha()" style="flex:1;background:linear-gradient(135deg,var(--navy),#1a4aad);">
+          <i class="fas fa-drafting-compass"></i> भू-नक्शा देखें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-title"><i class="fas fa-external-link-alt" style="color:var(--green)"></i> Official Government Links — Working Links</div>
+  <div class="link-grid">
+    <div class="link-card">
+      <span class="link-icon">🗺️</span>
+      <h4>फोटो पहाणी</h4>
+      <p>Maharashtra Bhulekh — Photo Pahani & Map</p>
+      <a href="https://bhulekh.mahabhumi.gov.in/" target="_blank">Open Bhulekh ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">📋</span>
+      <h4>7/12 Digital Satbara</h4>
+      <p>Digital 7/12 — महाराष्ट्र डिजिटल सातबारा</p>
+      <a href="https://digitalsatbara.mahabhumi.gov.in/" target="_blank">Open ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">🏛️</span>
+      <h4>महाभूलेख</h4>
+      <p>MahaBhulekh — 8A & Land Records</p>
+      <a href="https://mahabhulekh.maharashtra.gov.in/" target="_blank">Open ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">🗾</span>
+      <h4>भू-नक्शा</h4>
+      <p>Bhunaksha Maharashtra — Village Map</p>
+      <a href="https://bhunaksha.mahabhumi.gov.in/" target="_blank">Open ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">📝</span>
+      <h4>e-Mutation (फेरफार)</h4>
+      <p>जमीन नामांतर — eMutation Portal</p>
+      <a href="https://pdeigr.maharashtra.gov.in/" target="_blank">Open ↗</a>
+    </div>
+    <div class="link-card">
+      <span class="link-icon">💳</span>
+      <h4>E-Satbara</h4>
+      <p>Certified 7/12 — Digitally Signed</p>
+      <a href="https://digitalsatbara.mahabhumi.gov.in/" target="_blank">Open ↗</a>
+    </div>
+  </div>
+
+  <div style="background:#e8f5e9;border:2px solid var(--green);border-radius:10px;padding:1.2rem;margin-top:1.5rem;max-width:800px;margin-left:auto;margin-right:auto;">
+    <h4 style="color:var(--green);margin-bottom:0.5rem;"><i class="fas fa-info-circle"></i> फोटो पहाणी कैसे निकालें?</h4>
+    <ol style="font-size:0.88rem;color:var(--text);line-height:2;padding-left:1.5rem;">
+      <li>ऊपर "फोटो पहाणी देखें" बटन दबाएं</li>
+      <li>महाराष्ट्र भूलेख वेबसाइट खुलेगी</li>
+      <li>जिला → तालुका → गाव चुनें</li>
+      <li>Survey/Gat नंबर डालें</li>
+      <li>फोटो पहाणी या नक्शा देखें और Print/Download करें</li>
+    </ol>
+  </div>
+</div>
+
+<!-- AI ASSISTANT SECTION -->
+<div id="ai" class="section">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #4a148c, #1a237e);">
+    <h2>🤖 AI किसान सहायक</h2>
+    <p>सरकारी योजनाओं में आवेदन करने में AI आपकी मदद करेगा। Documents, Eligibility सब पूछें!</p>
+  </div>
+
+  <div class="ai-chat-container">
+    <div class="ai-header">
+      <div class="ai-avatar">🤖</div>
+      <div>
+        <h3>किसान मित्र AI सहायक</h3>
+        <p>आपकी भाषा में, आपकी सेवा में | हिंदी, मराठी, English</p>
+      </div>
+      <div class="ai-status">
+        <div class="status-dot"></div>
+        ऑनलाइन
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        <div class="msg-avatar bot-avatar">🤖</div>
+        <div class="msg-bubble">
+          🙏 नमस्ते! मैं <strong>किसान मित्र AI</strong> हूं।<br><br>
+          मैं आपकी इन चीज़ों में मदद कर सकता हूं:<br>
+          📋 योजनाओं के लिए <strong>जरूरी Documents</strong> बताना<br>
+          📝 <strong>Form भरने</strong> में मार्गदर्शन<br>
+          ✅ <strong>Eligibility Check</strong> करना<br>
+          🔗 <strong>Apply करने का Link</strong> देना<br><br>
+          आप कौन सी योजना के बारे में जानना चाहते हैं?
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-btns">
+      <button class="quick-btn" onclick="quickQ('PM किसान के लिए documents क्या चाहिए?')">📋 PM किसान Documents</button>
+      <button class="quick-btn" onclick="quickQ('फसल बीमा के लिए apply कैसे करें?')">🌱 Fasal Bima Apply</button>
+      <button class="quick-btn" onclick="quickQ('KCC किसान क्रेडिट कार्ड के लिए eligibility क्या है?')">💳 KCC Eligibility</button>
+      <button class="quick-btn" onclick="quickQ('अटल पेंशन योजना के बारे में बताएं')">👴 Atal Pension</button>
+      <button class="quick-btn" onclick="quickQ('7/12 उतारा कैसे निकालें?')">🗺️ 7/12 कैसे निकालें</button>
+    </div>
+
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chatInput" rows="1" placeholder="यहाँ अपना सवाल लिखें... (Hindi/Marathi/English)"></textarea>
+      <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>🇮🇳 <strong>किसान सेवा पोर्टल</strong> — Developed by: <strong>Sagar Dhopare</strong></p>
+  <p style="font-size:0.8rem;margin-top:0.3rem;">भारत सरकार — कृषि एवं किसान कल्याण मंत्रालय | © 2024</p>
+  <p style="font-size:0.75rem;margin-top:0.5rem;opacity:0.7;">📞 Helpline: 1800-180-1551 | ✉️ kisan@gov.in</p>
+</div>
+
+<!-- MODAL (Docs) -->
+<div class="modal-overlay" id="docsModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">जरूरी Documents</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== LIVE TIME =====
+function updateTime() {
+  const now = new Date();
+  document.getElementById('liveTime').textContent =
+    now.toLocaleDateString('hi-IN') + ' | ' + now.toLocaleTimeString('hi-IN');
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// ===== NAVIGATION =====
+function showTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-bar a').forEach(a => a.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+  const links = document.querySelectorAll('.nav-bar a');
+  const tabMap = { home:0, dashboard:1, schemes:2, land:3, pahani:4, ai:5 };
+  links[tabMap[tab]].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== SCHEMES DATA =====
+const schemes = [
+  {
+    id: 1, cat: 'income',
+    icon: '💰', color: '#e8f5e9', icolor: '#128807',
+    name: 'PM किसान सम्मान निधि', short: 'PM-KISAN',
+    ministry: 'कृषि एवं किसान कल्याण मंत्रालय',
+    desc: 'छोटे और सीमांत किसानों को प्रति वर्ष ₹6,000 की आर्थिक सहायता, 3 किस्तों में सीधे बैंक खाते में।',
+    benefit: '₹6,000 / वर्ष (3 किस्त)',
+    tags: [{t:'आय सहायता',c:'#d4edda',tc:'#155724'},{t:'Direct DBT',c:'#cce5ff',tc:'#004085'}],
+    link: 'https://pmkisan.gov.in/RegistrationFormNew.aspx',
+    docs: ['आधार कार्ड','बैंक पासबुक (IFSC सहित)','7/12 उतारा / भूमि रिकॉर्ड','राशन कार्ड','पासपोर्ट साइज फोटो','मोबाइल नंबर']
+  },
+  {
+    id: 2, cat: 'insurance',
+    icon: '🌱', color: '#fff3e0', icolor: '#FF6B00',
+    name: 'PM फसल बीमा योजना', short: 'PMFBY',
+    ministry: 'कृषि मंत्रालय',
+    desc: 'प्राकृतिक आपदाओं से फसल नुकसान पर बीमा कवर। किसान केवल 1.5-5% प्रीमियम देते हैं।',
+    benefit: 'फसल मूल्य का 100% बीमा',
+    tags: [{t:'फसल बीमा',c:'#fff3cd',tc:'#856404'},{t:'50%+ Subsidy',c:'#d4edda',tc:'#155724'}],
+    link: 'https://pmfby.gov.in/farmerRegistrationForm',
+    docs: ['आधार कार्ड','बैंक खाता विवरण','7/12 / खसरा नंबर','बुवाई प्रमाण पत्र','भूमि स्वामित्व / किरायेदारी दस्तावेज','फसल का नाम और क्षेत्र']
+  },
+  {
+    id: 3, cat: 'credit',
+    icon: '💳', color: '#e3f2fd', icolor: '#002366',
+    name: 'किसान क्रेडिट कार्ड', short: 'KCC',
+    ministry: 'कृषि एवं वित्त मंत्रालय',
+    desc: 'फसल ऋण, कृषि खर्च और आकस्मिक जरूरतों के लिए ₹3 लाख तक का ब्याज मुक्त ऋण।',
+    benefit: '₹3 लाख ऋण — 4% ब्याज',
+    tags: [{t:'ऋण / Loan',c:'#cce5ff',tc:'#004085'},{t:'Interest Subvention',c:'#d4edda',tc:'#155724'}],
+    link: 'https://pmkisan.gov.in/KCC.aspx',
+    docs: ['आधार कार्ड','पैन कार्ड','भूमि रिकॉर्ड (7/12)','बैंक खाता','पासपोर्ट फोटो','आय प्रमाण पत्र']
+  },
+  {
+    id: 4, cat: 'pension',
+    icon: '👴', color: '#fce4ec', icolor: '#880e4f',
+    name: 'PM किसान मानधन योजना', short: 'PM-KMY',
+    ministry: 'श्रम एवं रोजगार मंत्रालय',
+    desc: '60 वर्ष की आयु के बाद ₹3,000 प्रति माह पेंशन। 18-40 वर्ष के छोटे किसान पात्र।',
+    benefit: '₹3,000 / माह पेंशन',
+    tags: [{t:'पेंशन',c:'#fce4ec',tc:'#880e4f'},{t:'60+ आयु',c:'#f3e5f5',tc:'#4a148c'}],
+    link: 'https://maandhan.in/shramyogi',
+    docs: ['आधार कार्ड','बैंक खाता (IFSC)','भूमि रिकॉर्ड','उम्र प्रमाण','मोबाइल नंबर','पासपोर्ट फोटो']
+  },
+  {
+    id: 5, cat: 'pension',
+    icon: '🏛️', color: '#e8eaf6', icolor: '#1a237e',
+    name: 'अटल पेंशन योजना', short: 'APY',
+    ministry: 'वित्त मंत्रालय — PFRDA',
+    desc: '60 वर्ष के बाद ₹1,000 से ₹5,000 तक मासिक पेंशन। असंगठित क्षेत्र के किसानों के लिए।',
+    benefit: '₹1,000–₹5,000 / माह',
+    tags: [{t:'पेंशन',c:'#e8eaf6',tc:'#1a237e'},{t:'Tax Benefit',c:'#d4edda',tc:'#155724'}],
+    link: 'https://enps.nsdl.com/eNPS/NationalPensionSystem.html',
+    docs: ['आधार कार्ड','बैंक खाता (savings)','मोबाइल नंबर (Aadhaar linked)','18-40 वर्ष आयु']
+  },
+  {
+    id: 6, cat: 'irrigation',
+    icon: '💧', color: '#e0f7fa', icolor: '#006064',
+    name: 'PM कृषि सिंचाई योजना', short: 'PMKSY',
+    ministry: 'जल शक्ति मंत्रालय',
+    desc: '"हर खेत को पानी, हर बूंद अधिक फसल" — सूक्ष्म सिंचाई पर 55% तक सब्सिडी।',
+    benefit: '55% Subsidy on Drip/Sprinkler',
+    tags: [{t:'सिंचाई',c:'#e0f7fa',tc:'#006064'},{t:'55% Subsidy',c:'#d4edda',tc:'#155724'}],
+    link: 'https://pmksy.gov.in/',
+    docs: ['आधार कार्ड','भूमि रिकॉर्ड (7/12)','बैंक खाता','फोटो','जमीन का नक्शा / Map','जल स्रोत प्रमाण']
+  },
+  {
+    id: 7, cat: 'income',
+    icon: '🌿', color: '#f1f8e9', icolor: '#33691e',
+    name: 'परंपरागत कृषि विकास योजना', short: 'PKVY',
+    ministry: 'कृषि मंत्रालय',
+    desc: 'जैविक खेती अपनाने पर ₹50,000 प्रति हेक्टर की सहायता। 3 वर्ष के लिए।',
+    benefit: '₹50,000 / हेक्टर (3 वर्ष)',
+    tags: [{t:'जैविक खेती',c:'#f1f8e9',tc:'#33691e'},{t:'₹50K Grant',c:'#fff3cd',tc:'#856404'}],
+    link: 'https://pgsindia-ncof.gov.in/PKVY/Index.aspx',
+    docs: ['आधार कार्ड','7/12 उतारा','बैंक खाता','किसान समूह पंजीकरण','भूमि मानचित्र']
+  },
+  {
+    id: 8, cat: 'income',
+    icon: '🏪', color: '#fff8e1', icolor: '#f57f17',
+    name: 'राष्ट्रीय कृषि बाजार (eNAM)', short: 'eNAM',
+    ministry: 'कृषि मंत्रालय',
+    desc: 'ऑनलाइन मंडी — फसल को सही दाम मिले। देश भर की मंडियों में ऑनलाइन बेचें।',
+    benefit: 'बेहतर बाजार मूल्य',
+    tags: [{t:'Online Market',c:'#fff8e1',tc:'#f57f17'},{t:'Direct Sale',c:'#cce5ff',tc:'#004085'}],
+    link: 'https://enam.gov.in/web/registration/farmer-registration',
+    docs: ['आधार कार्ड','बैंक खाता','मोबाइल नंबर','पासपोर्ट फोटो','मंडी रजिस्ट्रेशन (स्थानीय)']
+  },
+  {
+    id: 9, cat: 'credit',
+    icon: '☀️', color: '#fffde7', icolor: '#f9a825',
+    name: 'PM कुसुम योजना', short: 'KUSUM',
+    ministry: 'नवीन एवं नवीकरणीय ऊर्जा मंत्रालय',
+    desc: 'सोलर पंप पर 90% सब्सिडी। खेत में सौर ऊर्जा से सिंचाई करें, बिजली भी बेचें।',
+    benefit: '90% Subsidy on Solar Pump',
+    tags: [{t:'Solar Pump',c:'#fffde7',tc:'#f9a825'},{t:'90% Subsidy',c:'#d4edda',tc:'#155724'}],
+    link: 'https://pmkusum.mnre.gov.in/',
+    docs: ['आधार कार्ड','7/12 उतारा','बैंक खाता','पासपोर्ट फोटो','खेत का नक्शा / Map']
+  },
+  {
+    id: 10, cat: 'income',
+    icon: '🧪', color: '#e8f5e9', icolor: '#2e7d32',
+    name: 'मृदा स्वास्थ्य कार्ड', short: 'SHC',
+    ministry: 'कृषि मंत्रालय',
+    desc: 'मिट्टी की जांच — सही खाद-उर्वरक की जानकारी। उपज बढ़ाएं, लागत घटाएं।',
+    benefit: 'मुफ्त मिट्टी जांच + Advice',
+    tags: [{t:'मुफ्त सेवा',c:'#d4edda',tc:'#155724'},{t:'Soil Test',c:'#e8f5e9',tc:'#2e7d32'}],
+    link: 'https://soilhealth.dac.gov.in/',
+    docs: ['आधार कार्ड','भूमि विवरण (7/12)','मोबाइल नंबर']
+  },
+  {
+    id: 11, cat: 'insurance',
+    icon: '🏥', color: '#fce4ec', icolor: '#c62828',
+    name: 'आयुष्मान भारत (किसान)', short: 'PMJAY',
+    ministry: 'स्वास्थ्य मंत्रालय',
+    desc: 'किसान परिवारों को ₹5 लाख तक का मुफ्त स्वास्थ्य बीमा। अस्पताल में भर्ती मुफ्त।',
+    benefit: '₹5 लाख / वर्ष Health Cover',
+    tags: [{t:'स्वास्थ्य बीमा',c:'#fce4ec',tc:'#c62828'},{t:'₹5 लाख',c:'#d4edda',tc:'#155724'}],
+    link: 'https://beneficiary.nha.gov.in/',
+    docs: ['आधार कार्ड','राशन कार्ड','मोबाइल नंबर','पासपोर्ट फोटो','परिवार के सदस्यों का विवरण']
+  },
+  {
+    id: 12, cat: 'pension',
+    icon: '🛡️', color: '#e8eaf6', icolor: '#283593',
+    name: 'अटल भूजन योजना / PM-SYM', short: 'PM-SYM',
+    ministry: 'श्रम मंत्रालय — किसान विशेष',
+    desc: 'किसान श्रमिकों के लिए ₹3,000/माह पेंशन। 60 वर्ष के बाद गारंटीड पेंशन। अटल बीमित योजना।',
+    benefit: '₹3,000 / माह पेंशन',
+    tags: [{t:'Atal Pension',c:'#e8eaf6',tc:'#283593'},{t:'Guaranteed',c:'#d4edda',tc:'#155724'}],
+    link: 'https://maandhan.in/',
+    docs: ['आधार कार्ड','बैंक खाता (savings)','मोबाइल नंबर','आयु प्रमाण (18-40 वर्ष)','किसान ID / ESIC नंबर']
+  },
+];
+
+function renderSchemes(cat) {
+  const grid = document.getElementById('schemesGrid');
+  const filtered = cat === 'all' ? schemes : schemes.filter(s => s.cat === cat);
+  grid.innerHTML = filtered.map(s => `
+    <div class="scheme-card" data-cat="${s.cat}">
+      <div class="scheme-header" style="background:${s.color};">
+        <div class="scheme-icon" style="background:${s.icolor}20;">${s.icon}</div>
+        <div>
+          <div class="scheme-name">${s.name}</div>
+          <div class="scheme-ministry">${s.short} | ${s.ministry}</div>
+        </div>
+      </div>
+      <div class="scheme-body">
+        <div class="scheme-desc">${s.desc}</div>
+        <div class="benefit-amount">💰 ${s.benefit}</div>
+        <div class="scheme-tags">${s.tags.map(t=>`<span class="tag" style="background:${t.c};color:${t.tc};">${t.t}</span>`).join('')}</div>
+      </div>
+      <div class="scheme-actions">
+        <a href="${s.link}" target="_blank" class="btn-apply">
+          <i class="fas fa-external-link-alt"></i> Apply करें ↗
+        </a>
+        <button class="btn-docs" onclick='showDocs(${s.id})'>📄 Docs</button>
+        <button class="btn-info" onclick='askAI("${s.name} के बारे में बताएं और कैसे apply करें?")'>🤖 AI Help</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterSchemes(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSchemes(cat);
+}
+
+renderSchemes('all');
+
+// ===== LAND RECORDS =====
+function fetch712() {
+  const dist = document.getElementById('dist712').value;
+  const tal = document.getElementById('tal712').value;
+  const vil = document.getElementById('vil712').value || 'हवेली गाव';
+  const survey = document.getElementById('survey712').value || '123/1';
+  document.getElementById('r-dist').textContent = dist;
+  document.getElementById('r-tal').textContent = tal;
+  document.getElementById('r-vil').textContent = vil;
+  document.getElementById('r-survey').textContent = survey;
+  document.getElementById('result712').classList.add('show');
+  showToast('✅ 7/12 उतारा तैयार हुआ!');
+}
+
+function fetch8A() {
+  const dist = document.getElementById('dist8a').value;
+  const khata = document.getElementById('khata8a').value || '456';
+  document.getElementById('ra-dist').textContent = dist;
+  document.getElementById('ra-khata').textContent = khata;
+  document.getElementById('result8a').classList.add('show');
+  showToast('✅ 8A खाता उतारा तैयार हुआ!');
+}
+
+function openPahani() {
+  const dist = document.getElementById('pahaniDist').value;
+  const vil = document.getElementById('pahaniVil').value;
+  const survey = document.getElementById('pahaniSurvey').value;
+  showToast('🗺️ फोटो पहाणी पोर्टल खुल रहा है...');
+  setTimeout(() => window.open('https://bhulekh.mahabhumi.gov.in/', '_blank'), 500);
+}
+
+function openNaksha() {
+  showToast('🗾 भू-नक्शा पोर्टल खुल रहा है...');
+  setTimeout(() => window.open('https://bhunaksha.mahabhumi.gov.in/', '_blank'), 500);
+}
+
+function printRecord() { window.print(); }
+function downloadRecord() { showToast('⬇️ Download हो रहा है...'); }
+
+// ===== DOCS MODAL =====
+function showDocs(id) {
+  const s = schemes.find(x => x.id === id);
+  document.getElementById('modalTitle').textContent = s.name + ' — जरूरी Documents';
+  document.getElementById('modalBody').innerHTML = `
+    <p style="color:var(--sub);font-size:0.9rem;margin-bottom:1rem;">नीचे दिए गए सभी दस्तावेज आवेदन के समय तैयार रखें:</p>
+    <ul class="doc-list">${s.docs.map((d,i)=>`<li><span style="background:var(--navy);color:white;padding:0.1rem 0.5rem;border-radius:10px;font-size:0.75rem;font-weight:700;margin-right:0.3rem;">${i+1}</span> ${d}</li>`).join('')}</ul>
+    <div style="margin-top:1.2rem;background:#e8f5e9;padding:1rem;border-radius:8px;">
+      <p style="font-size:0.85rem;color:var(--green);font-weight:700;margin-bottom:0.5rem;">💡 AI सहायक से Form भरने में मदद लें:</p>
+      <button onclick="askAI('${s.name} का form कैसे भरें?');closeModal();" style="padding:0.6rem 1rem;background:var(--navy);color:white;border:none;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;font-size:0.85rem;">🤖 AI से पूछें</button>
+    </div>
+    <div style="margin-top:0.8rem;">
+      <a href="${s.link}" target="_blank" style="display:block;text-align:center;padding:0.8rem;background:linear-gradient(135deg,var(--green),#0a6604);color:white;border-radius:8px;text-decoration:none;font-weight:700;">✅ Apply करें ↗</a>
+    </div>`;
+  document.getElementById('docsModal').classList.add('show');
+}
+
+function closeModal() { document.getElementById('docsModal').classList.remove('show'); }
+
+// ===== AI ASSISTANT =====
+const ANTHROPIC_API_KEY = null; // API key handled by platform
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  addMsg('user', msg);
+  const typing = addTyping();
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `Tu ek Indian Government Kisan Portal ka AI Assistant hai — "Kisan Mitra". 
+Tu Hindi, Marathi aur English mein jawab deta hai.
+Sirf kisan yojanaon ke baare mein batao:
+- PM Kisan Samman Nidhi, PM Fasal Bima, KCC, PM Kusum, PMKSY, eNAM, PKVY, Soil Health Card, Ayushman Bharat, Atal Pension Yojana, PM-KMY, PM-SYM
+- Maharashtra land records: 7/12 satbara, 8A, Photo Pahani (bhulekh.mahabhumi.gov.in)
+- Documents needed, eligibility, how to apply, links
+
+Jawab mein:
+- Documents ki numbered list
+- Apply link
+- Eligibility conditions
+- Step-by-step process
+Format: Clean, readable Hindi mein. Emojis use karo. Short paragraphs.`,
+        messages: [{ role: 'user', content: msg }]
+      })
+    });
+    const data = await resp.json();
+    typing.remove();
+    const reply = data.content?.[0]?.text || 'कुछ गड़बड़ हुई। कृपया दोबारा पूछें।';
+    addMsg('bot', reply);
+  } catch(e) {
+    typing.remove();
+    addMsg('bot', getLocalAnswer(msg));
+  }
+}
+
+function getLocalAnswer(q) {
+  const lq = q.toLowerCase();
+  if (lq.includes('pm kisan') || lq.includes('pm किसान')) {
+    return `💰 <strong>PM किसान सम्मान निधि</strong><br><br>
+<strong>📋 जरूरी Documents:</strong><br>
+1️⃣ आधार कार्ड<br>2️⃣ बैंक पासबुक (IFSC सहित)<br>3️⃣ 7/12 उतारा / भूमि रिकॉर्ड<br>4️⃣ राशन कार्ड<br>5️⃣ मोबाइल नंबर<br><br>
+<strong>✅ Eligibility:</strong> 2 हेक्टर से कम जमीन वाले किसान<br><br>
+<strong>💰 लाभ:</strong> ₹6,000 प्रति वर्ष (3 किस्त)<br><br>
+🔗 <strong>Apply करें:</strong> pmkisan.gov.in`;
+  }
+  if (lq.includes('7/12') || lq.includes('सातबारा')) {
+    return `📋 <strong>7/12 उतारा कैसे निकालें?</strong><br><br>
+<strong>Step 1:</strong> digitalsatbara.mahabhumi.gov.in पर जाएं<br>
+<strong>Step 2:</strong> Division → District → Taluka → Village चुनें<br>
+<strong>Step 3:</strong> Survey नंबर डालें<br>
+<strong>Step 4:</strong> 7/12 देखें और Print/Download करें<br><br>
+🔗 <strong>Direct Link:</strong> digitalsatbara.mahabhumi.gov.in<br>
+🔗 <strong>8A के लिए:</strong> mahabhulekh.maharashtra.gov.in`;
+  }
+  if (lq.includes('फसल बीमा') || lq.includes('fasal bima') || lq.includes('pmfby')) {
+    return `🌱 <strong>PM फसल बीमा योजना (PMFBY)</strong><br><br>
+<strong>📋 Documents:</strong><br>
+1️⃣ आधार कार्ड<br>2️⃣ बैंक खाता<br>3️⃣ 7/12 / खसरा नंबर<br>4️⃣ बुवाई प्रमाण पत्र<br>5️⃣ भूमि स्वामित्व दस्तावेज<br><br>
+<strong>💰 लाभ:</strong> 50%+ Premium Subsidy, फसल का 100% बीमा<br>
+🔗 <strong>Apply:</strong> pmfby.gov.in`;
+  }
+  if (lq.includes('atal') || lq.includes('अटल') || lq.includes('pension')) {
+    return `🏛️ <strong>अटल पेंशन योजना (APY)</strong><br><br>
+<strong>✅ Eligibility:</strong> 18-40 वर्ष, बैंक खाता होना जरूरी<br><br>
+<strong>💰 लाभ:</strong> 60 वर्ष बाद ₹1,000–₹5,000/माह पेंशन<br><br>
+<strong>📋 Documents:</strong><br>
+1️⃣ आधार कार्ड<br>2️⃣ Savings Bank Account<br>3️⃣ Aadhaar-linked मोबाइल नंबर<br><br>
+🔗 <strong>Apply:</strong> maandhan.in या अपने बैंक में जाएं`;
+  }
+  return `🙏 नमस्ते! मैं आपकी मदद करूंगा।<br><br>
+आप ये पूछ सकते हैं:<br>
+• <strong>PM किसान</strong> — Documents, Apply<br>
+• <strong>फसल बीमा</strong> — Eligibility, Link<br>
+• <strong>KCC</strong> — Loan Details<br>
+• <strong>7/12 उतारा</strong> — कैसे निकालें<br>
+• <strong>अटल पेंशन</strong> — Details<br><br>
+नीचे Quick Buttons से भी पूछ सकते हैं! 👆`;
+}
+
+function addMsg(type, text) {
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  div.innerHTML = `
+    <div class="msg-avatar ${type === 'bot' ? 'bot-avatar' : 'user-avatar'}">${type === 'bot' ? '🤖' : '👨‍🌾'}</div>
+    <div class="msg-bubble">${text}</div>`;
+  document.getElementById('chatMessages').appendChild(div);
+  document.getElementById('chatMessages').scrollTop = 9999;
+  return div;
+}
+
+function addTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.innerHTML = `<div class="msg-avatar bot-avatar">🤖</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  document.getElementById('chatMessages').appendChild(div);
+  document.getElementById('chatMessages').scrollTop = 9999;
+  return div;
+}
+
+function quickQ(q) {
+  document.getElementById('chatInput').value = q;
+  sendMessage();
+}
+
+function askAI(q) {
+  showTab('ai');
+  document.getElementById('chatInput').value = q;
+  sendMessage();
+}
+
+document.getElementById('chatInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== MODAL CLOSE ON CLICK OUTSIDE =====
+document.getElementById('docsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
